@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" style="width:99%;height:99%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/xterm/3.9.2/xterm.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/xterm/3.9.2/xterm.min.js"></script>
+    <script>
+        const pid = +"{{ pid }}"
+    </script>
+</head>
+
+<body style="width:99%;height:99%;">
+    <div id="terminal" style="width:99%;height:99%;"></div>
+    <script>
+        var term = new Terminal()
+        // var ws = new WebSocket("ws://" + location.host + "/internal/ws/terminal/" + pid)
+        // ws.onopen = () => {
+        //     console.log("Websocket open")
+        //     term.write("[WebTerminal] WebSocket connected")
+        // }
+        // ws.onclose = () => {
+        //     console.warn("WebSocket closed unexpectedly, reloading ws...")
+        //     term.write("[WebTerminal] WebSocket closed unexpectedly, reloading ws...")
+        //     ws = new WebSocket("ws://" + location.host + "/internal/ws/terminal/" + pid)
+        // }
+        // ws.onmessage = (evt) => {
+        //     term.write(evt.data)
+        // }
+        term.open(document.getElementById('terminal'))
+        window.parent.$.get("/internal/terminal_ajax/" + pid + "/flush", (data) => {
+            term.write(data)
+        })
+
+        term.on('key', (key, ev) => {
+            console.log(key.charCodeAt(0));
+            // if (key.charCodeAt(0) == 13)
+            //     term.write('\n');
+            // term.write(key);
+            window.parent.$.post("/internal/terminal_ajax/" + pid + "/write", { s: key })
+        })
+        function getSTDOUT() {
+            window.parent.$.get("/internal/terminal_ajax/" + pid + "/read", (data) => {
+                term.write(data)
+                getSTDOUT()
+            })
+        }
+        getSTDOUT()
+    </script>
+</body>
+
+</html>

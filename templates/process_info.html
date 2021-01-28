@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processes List - DangoTown Processes Manager</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.1/css/mdui.min.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.1/js/mdui.min.js"></script>
+    <script src="/static/layer/layer.js"></script>
+    <script>
+        const pid = +"{{ pid }}"
+    </script>
+</head>
+
+<body>
+    <div class="mdui-container">
+        <h3 class="mdui-typo-display-4">Process {{ pid }} - {{ process_name }}</h3>
+        <div class="mdui-list">
+            <a href="javascript:void(0);" id="terminal" class="mdui-list-item mdui-ripple">Terminal</a>
+        </div>
+    </div>
+    <script src="/static/info.js"></script>
+</body>
+
+</html>

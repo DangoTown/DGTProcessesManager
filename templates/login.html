@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DangoTown Processes Manager</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.1/css/mdui.min.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.1/js/mdui.min.js"></script>
+</head>
+
+<body>
+    <div class="mdui-container">
+        <form action="/login" method="POST">
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">Username</label>
+                <input class="mdui-textfield-input" type="text" name="u" />
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">Password</label>
+                <input class="mdui-textfield-input" type="password" name="p" />
+            </div>
+            <button class="mdui-btn mdui-btn-raised mdui-color-blue-accent mdui-btn-block" type="submit">Login</button>
+        </form>
+
+    </div>
+    <script src="/static/login.js"></script>
+</body>
+
+</html>
